@@ -1,0 +1,14 @@
+env: dev
+logger:
+  dev_mode: true
+http_server:
+  port: 8080
+  host: 0.0.0.0
+  gin_dev_mode: true
+db:
+  host: localhost
+  name: test
+  password: test
+  ssl_mode: disable
+  user: test
+  port: 5432

@@ -1,0 +1,37 @@
+version: '3.6'
+
+networks:
+  bot_net:
+    name: bot net
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: dev.dockerfile
+    image: media_savior
+    container_name: media_savior
+    restart: always
+    env_file:
+      - .env.dev
+    volumes:
+      - .:/app
+      - $GOPATH/pkg/mod:/go/pkg/mod
+    networks:
+      - bot_net
+    ports:
+      - '8009:8080'
+  postgres:
+    image: postgres:12-alpine
+    container_name: bot_postgres
+    restart: always
+    env_file:
+      - .env.dev
+    volumes:
+      - ./tmp/postgres:/var/lib/postgresql/data
+    networks:
+      bot_net:
+        aliases:
+          - postgres.docker.local
+    ports:
+      - '5432:5432'

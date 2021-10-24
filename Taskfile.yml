@@ -1,0 +1,34 @@
+version: '3'
+
+env:
+  APP: media_savior
+
+tasks:
+  up:
+    desc: 'Run docker compose and subscribe to logs'
+    deps: [ down ]
+    cmds:
+      - docker-compose up -d
+      - docker logs -f $APP
+  down:
+    desc: 'Stops docker compose'
+    silent: true
+    cmds:
+      - docker-compose down --remove-orphans
+  attach_hooks:
+    desc: 'Attaches git hooks'
+    cmds:
+      - cp ./tools/prepare-commit-msg.sh ./.git/hooks/prepare-commit-msg
+      - cp ./tools/pre-commit.sh ./.git/hooks/pre-commit
+      - cp ./tools/pre-push.sh ./.git/hooks/pre-push
+      - chmod 777 ./.git/hooks/prepare-commit-msg
+      - chmod 777 ./.git/hooks/pre-commit
+      - chmod 777 ./.git/hooks/pre-push
+  lint:
+    desc: 'Run linters'
+    cmds:
+      - golangci-lint run --tests=0 ./...
+  test:
+    desc: 'Run tests'
+    cmds:
+      - go test ./...
