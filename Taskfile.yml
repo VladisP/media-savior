@@ -1,7 +1,7 @@
 version: '3'
 
-env:
-  APP: media_savior
+dotenv:
+  - '.env.dev'
 
 tasks:
   up:
@@ -10,11 +10,13 @@ tasks:
     cmds:
       - docker-compose up -d
       - docker logs -f $APP
+
   down:
     desc: 'Stops docker compose'
     silent: true
     cmds:
       - docker-compose down --remove-orphans
+
   attach_hooks:
     desc: 'Attaches git hooks'
     cmds:
@@ -24,11 +26,23 @@ tasks:
       - chmod 777 ./.git/hooks/prepare-commit-msg
       - chmod 777 ./.git/hooks/pre-commit
       - chmod 777 ./.git/hooks/pre-push
+
   lint:
     desc: 'Run linters'
     cmds:
       - golangci-lint run --tests=0 ./...
+
   test:
     desc: 'Run tests'
     cmds:
       - go test ./...
+
+  create_migration:
+    desc: "Create SQL-migration files"
+    cmds:
+      - migrate -database $PSQL_MIGRATE_URL -path ./migrations create -ext sql -dir ./migrations -seq -digits 6 {{.CLI_ARGS}}
+
+  migrate:
+    desc: "Shortcut for migrate tool usage"
+    cmds:
+      - migrate -database $PSQL_MIGRATE_URL -path ./migrations {{.CLI_ARGS}}

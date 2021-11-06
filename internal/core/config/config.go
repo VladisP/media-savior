@@ -33,12 +33,14 @@ type HTTPServer struct {
 }
 
 type DB struct {
-	Host     string `yaml:"host" validate:"required"`
-	Name     string `yaml:"name" validate:"required"`
-	Password string `yaml:"password" validate:"required"`
-	SSLMode  string `yaml:"ssl_mode" validate:"required"`
-	User     string `yaml:"user" validate:"required"`
-	Port     string `yaml:"port" validate:"required"`
+	Host               string `yaml:"host" validate:"required"`
+	Name               string `yaml:"name" validate:"required"`
+	Password           string `yaml:"password" validate:"required"`
+	SSLMode            string `yaml:"ssl_mode" validate:"required"`
+	User               string `yaml:"user" validate:"required"`
+	Port               string `yaml:"port" validate:"required"`
+	MigrationsDir      string `yaml:"migrations_dir" validate:"required"`
+	MaxOpenConnections int    `yaml:"max_open_connections" validate:"required"`
 }
 
 func readConfig(configEnvName string, config interface{}) error {

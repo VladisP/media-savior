@@ -11,11 +11,13 @@ type HTTPHandler interface {
 type InputHandlers struct {
 	fx.In
 
-	VKHTTPHandler HTTPHandler `name:"vk_handler"`
+	VKHTTPHandler    HTTPHandler `name:"vk_handler"`
+	UsersHTTPHandler HTTPHandler `name:"users_handler"`
 }
 
 func NewHTTPHandlers(input InputHandlers) []HTTPHandler {
 	return []HTTPHandler{
 		input.VKHTTPHandler,
+		input.UsersHTTPHandler,
 	}
 }
