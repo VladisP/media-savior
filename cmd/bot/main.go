@@ -4,11 +4,11 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 
+	"github.com/VladisP/media-savior/internal/common/config"
 	"github.com/VladisP/media-savior/internal/common/db"
 	"github.com/VladisP/media-savior/internal/common/log"
+	"github.com/VladisP/media-savior/internal/common/server"
 	"github.com/VladisP/media-savior/internal/common/validator"
-	"github.com/VladisP/media-savior/internal/core/config"
-	"github.com/VladisP/media-savior/internal/core/server"
 	"github.com/VladisP/media-savior/internal/users"
 	"github.com/VladisP/media-savior/internal/vk"
 )
@@ -28,8 +28,8 @@ func appOptions() []fx.Option {
 			vk.NewHTTPHandler,
 		),
 		fx.Invoke(
-			func(handlers []server.HTTPHandler, server server.HTTPServer) {
-				server.MountHandlers(handlers)
+			func(handlers []server.HTTPHandler, s server.HTTPServer) {
+				s.MountHandlers(handlers)
 			},
 		),
 		fx.WithLogger(

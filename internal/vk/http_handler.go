@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/fx"
 
-	"github.com/VladisP/media-savior/internal/core/server"
+	"github.com/VladisP/media-savior/internal/common/server"
 )
 
 type httpHandler struct {

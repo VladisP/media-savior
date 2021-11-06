@@ -18,8 +18,8 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
+	"github.com/VladisP/media-savior/internal/common/config"
 	"github.com/VladisP/media-savior/internal/common/log"
-	"github.com/VladisP/media-savior/internal/core/config"
 )
 
 type InputParams struct {

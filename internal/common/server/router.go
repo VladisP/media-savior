@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/fx"
 
+	"github.com/VladisP/media-savior/internal/common/config"
 	"github.com/VladisP/media-savior/internal/common/log"
-	"github.com/VladisP/media-savior/internal/core/config"
 )
 
 type InputParams struct {

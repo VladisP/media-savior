@@ -7,7 +7,7 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
-	"github.com/VladisP/media-savior/internal/core/config"
+	"github.com/VladisP/media-savior/internal/common/config"
 )
 
 type ZapLogger interface {
