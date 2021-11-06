@@ -12,3 +12,5 @@ db:
   ssl_mode: disable
   user: test
   port: 5432
+  migrations_dir: file://../../migrations
+  max_open_connections: 5

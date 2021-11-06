@@ -24,6 +24,7 @@ type OutputRoutes struct {
 
 	RootHandler http.Handler `name:"root_handler"`
 	VKGroup     gin.IRoutes  `name:"vk_router_group"`
+	UsersGroup  gin.IRoutes  `name:"users_router_group"`
 }
 
 func NewRouter(p InputParams) OutputRoutes {
@@ -44,5 +45,6 @@ func NewRouter(p InputParams) OutputRoutes {
 	return OutputRoutes{
 		RootHandler: engine,
 		VKGroup:     rootGroup.Group("/vk"),
+		UsersGroup:  rootGroup.Group("/users"),
 	}
 }
